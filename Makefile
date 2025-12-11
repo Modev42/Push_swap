@@ -1,33 +1,45 @@
 NAME = push_swap
 
 CC = cc
-FLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
+RM = rm -f
 
-SRC = main.c \
-      ops_push.c \
-      ops_swap.c \
-      ops_rotate.c \
-      utils.c \
-      sort_small.c \
-      sort_main.c \
-      ft_split.c \
+SRCS = main.c \
+       text_operations.c \
+       text_operations2.c \
+       tokenizer.c \
+       tokenizer2.c \
+       stack_implementation.c \
+       stack_utils.c \
+       operations.c \
+       operations2.c \
+       validation.c \
+       validation2.c \
+       algorithm_helpers.c \
+       median_calculator.c \
+       sort_small_sets.c \
+       sort_large_sets.c \
+       sort_large_utils.c \
+       sort_controller.c \
+       memory_management.c
 
+OBJS = $(SRCS:.c=.o)
 
-OBJ = $(SRC:.c=.o)
+HEADER = push_swap.h
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	$(CC) $(FLAGS) $(OBJ) -o $(NAME)
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
-%.o: %.c push_swap.h
-	$(CC) $(FLAGS) -c $< -o $@
+%.o: %.c $(HEADER)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ)
+	$(RM) $(OBJS)
 
 fclean: clean
-	rm -f $(NAME)
+	$(RM) $(NAME)
 
 re: fclean all
 

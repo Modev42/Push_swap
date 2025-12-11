@@ -1,37 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ops_swap.c                                         :+:      :+:    :+:   */
+/*   sort_controller.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: meodev <meodev@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/16 02:50:01 by meodev            #+#    #+#             */
-/*   Updated: 2025/11/16 02:50:04 by meodev           ###   ########.fr       */
+/*   Created: 2025/11/15 19:59:29 by meodev            #+#    #+#             */
+/*   Updated: 2025/12/08 04:01:31 by meodev           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swp_a(t_ps *d)
+void	sort_stack(t_program *prog)
 {
-	int	tmp;
-
-	if (d->na < 2)
+	if (is_stack_sorted(prog->a))
 		return ;
-	tmp = d->a[0];
-	d->a[0] = d->a[1];
-	d->a[1] = tmp;
-	write(1, "sa\n", 3);
-}
-
-void	swp_b(t_ps *d)
-{
-	int	tmp;
-
-	if (d->nb < 2)
-		return ;
-	tmp = d->b[0];
-	d->b[0] = d->b[1];
-	d->b[1] = tmp;
-	write(1, "sb\n", 3);
+	if (prog->a->size == 2)
+		op_swap(prog->a, 'a');
+	else if (prog->a->size == 3)
+		sort_three_elements(prog->a);
+	else if (prog->a->size <= 5)
+		sort_five_elements(prog);
+	else
+		sort_large_stack(prog);
 }

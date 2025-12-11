@@ -1,46 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_small.c                                       :+:      :+:    :+:   */
+/*   memory_management.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: meodev <meodev@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/16 02:50:49 by meodev            #+#    #+#             */
-/*   Updated: 2025/11/16 02:50:50 by meodev           ###   ########.fr       */
+/*   Created: 2025/11/15 19:31:50 by meodev            #+#    #+#             */
+/*   Updated: 2025/12/08 01:31:54 by meodev           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	srt_two(t_ps *d)
+void	memory_cleanup(t_program *prog, int free_input)
 {
-	if (d->a[0] > d->a[1])
-		swp_a(d);
-}
-
-void	srt_three(t_ps *d)
-{
-	int	a;
-	int	b;
-	int	c;
-
-	a = d->a[0];
-	b = d->a[1];
-	c = d->a[2];
-	if (a > b && b > c)
-	{
-		swp_a(d);
-		rrot_a(d);
-	}
-	else if (a > b && b < c && a > c)
-		rot_a(d);
-	else if (a > b && b < c && a < c)
-		swp_a(d);
-	else if (a < b && b > c && a > c)
-		rrot_a(d);
-	else if (a < b && b > c && a < c)
-	{
-		swp_a(d);
-		rot_a(d);
-	}
+	if (!prog)
+		return ;
+	if (prog->a)
+		stack_destroy(prog->a);
+	if (prog->b)
+		stack_destroy(prog->b);
+	if (free_input && prog->input)
+		free_tokens(prog->input);
+	free(prog);
 }
